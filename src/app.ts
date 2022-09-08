@@ -22,15 +22,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use('/', (req, res) => {
-  res.status(200).json({
-    messag: "welcome"
-  })
-})
 app.use('/api/trips', tripsRouter);
 app.use('/api/bookedtrips', bookedTripsRouter);
 app.use('/api/mail', mailRouter);
 app.use("/api/admin", adminRouter);
+
+app.use('/', (req, res) => {
+  res.status(200).json({
+    message: "welcome"
+  })
+})
 //app.use("/users", usersRouter);
 
 export default app;
