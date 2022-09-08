@@ -22,6 +22,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use('/', (req, res) => {
+  res.render('WELCOME TO EXPRESS TRAVELS SERVER')
+})
 app.use('/api/trips', tripsRouter);
 app.use('/api/bookedtrips', bookedTripsRouter);
 app.use('/api/mail', mailRouter);

@@ -24,7 +24,7 @@ exports.imageLoginSchema = joi_1.default.object().keys({
     face_id: joi_1.default.string().required(),
 });
 const generateToken = (user) => {
-    const pass = process.env.JWT_SECRET;
+    const pass = process.env.JWT_SECRETE;
     return jsonwebtoken_1.default.sign(user, pass, { expiresIn: "7d" });
 };
 exports.generateToken = generateToken;
