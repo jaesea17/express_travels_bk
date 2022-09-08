@@ -27,11 +27,11 @@ app.use('/api/bookedtrips', bookedTripsRouter);
 app.use('/api/mail', mailRouter);
 app.use("/api/admin", adminRouter);
 
-app.use('/', (req, res) => {
-  res.status(200).json({
-    message: "welcome"
-  })
-})
+// app.use('/', (req, res) => {
+//   res.status(200).json({
+//     message: "welcome"
+//   })
+// })
 //app.use("/users", usersRouter);
 
 export default app;
