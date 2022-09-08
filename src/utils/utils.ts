@@ -17,11 +17,11 @@ export const loginSchema = Joi.object().keys({
 });
 
 export const imageLoginSchema = Joi.object().keys({
-    face_id: Joi.string().required(), 
+    face_id: Joi.string().required(),
 });
 
 export const generateToken = (user: { [key: string]: unknown }): unknown => {
-    const pass = process.env.JWT_SECRET as string;
+    const pass = process.env.JWT_SECRETE as string;
     return jwt.sign(user, pass, { expiresIn: "7d" });
 };
 
