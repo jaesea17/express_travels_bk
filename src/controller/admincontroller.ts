@@ -27,11 +27,11 @@ export async function RegisterAdmin(
 
     const passwordHash = await bcrypt.hash(req.body.password, 8);
 
-    if(await AdminInstance.findOne({where:{email:req.body.email}})){
+    if (await AdminInstance.findOne({ where: { email: req.body.email } })) {
       return res.status(409).json({
-         message:"Email already Exist"
+        message: "Email already Exist"
       })
-     }
+    }
 
     const record = await AdminInstance.create({
       id: id,
@@ -47,7 +47,7 @@ export async function RegisterAdmin(
       record,
     });
   } catch (err) {
-    console.log('@48',err);
+    console.log('@48', err);
     res.status(500).json({
       msg: "failed to register",
       route: "/register",
@@ -75,17 +75,17 @@ export async function ImageLoginAdmin(
     const { id } = User;
     const token = generateToken({ id });
 
-    
+
     // const validUser = await bcrypt.compare(req.body.password, User.password);
 
     if (!User) {
-     return  res.status(401).json({
+      return res.status(401).json({
         message: "Email do not match",
       });
     }
 
     if (User) {
-      return res.status(200).json({ message: "Login successful", token, User:{id:User.id,email: User.email, phone:User.phone, image:User.image, face_id:User.face_id, fullname:User.fullname, } });
+      return res.status(200).json({ message: "Login successful", token, User: { id: User.id, email: User.email, phone: User.phone, image: User.image, face_id: User.face_id, fullname: User.fullname, } });
     }
   } catch (err) {
     console.log(err)
@@ -104,36 +104,44 @@ export async function LoginAdmin(
 ) {
   // const id = uuidv4();
   try {
+    console.log("adminController 107");
+
     const validationResult = loginSchema.validate(req.body, options);
+    console.log("adminController 108");
     if (validationResult.error) {
       return res.status(400).json({
         Error: validationResult.error.details[0].message,
       });
     }
+    console.log("adminController 109");
     const User = (await AdminInstance.findOne({
       where: { email: req.body.email }
     })) as unknown as { [key: string]: string };
 
-    if(!User){
+    if (!User) {
       return res.status(401).json({
         message: "Incorrect Email or password",
       });
     }
 
+    console.log("adminController 110");
     const { id } = User;
+    console.log("adminController 111");
     const token = generateToken({ id });
 
-    
+    console.log("adminController 112");
+
     const validUser = await bcrypt.compare(req.body.password, User.password);
 
+    console.log("adminController 113");
     if (!validUser) {
-     return  res.status(401).json({
+      return res.status(401).json({
         message: "Incorrect Email or password",
       });
     }
 
     if (validUser) {
-      return res.status(200).json({ message: "Login successful", token, User:{id:User.id,email: User.email, phone:User.phone, image:User.image, face_id:User.face_id, fullname:User.fullname, } });
+      return res.status(200).json({ message: "Login successful", token, User: { id: User.id, email: User.email, phone: User.phone, image: User.image, face_id: User.face_id, fullname: User.fullname, } });
     }
   } catch (err) {
     console.log(err)
@@ -166,7 +174,7 @@ export async function updateAdmin(req: Request, res: Response) {
 
     const updatedAdmin = await record.update({
       email,
-      password:passwordHash,
+      password: passwordHash,
       fullname,
       phone,
       image,
@@ -218,7 +226,7 @@ export async function checkEmail(req: Request, res: Response) {
         message: "record not found",
       });
     }
-    
+
     return res.status(200).json({
       message: "record found",
       // record,

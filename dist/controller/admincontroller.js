@@ -82,12 +82,15 @@ exports.ImageLoginAdmin = ImageLoginAdmin;
 async function LoginAdmin(req, res, next) {
     // const id = uuidv4();
     try {
+        console.log("adminController 107");
         const validationResult = utils_1.loginSchema.validate(req.body, utils_1.options);
+        console.log("adminController 108");
         if (validationResult.error) {
             return res.status(400).json({
                 Error: validationResult.error.details[0].message,
             });
         }
+        console.log("adminController 109");
         const User = (await admin_1.AdminInstance.findOne({
             where: { email: req.body.email }
         }));
@@ -96,9 +99,13 @@ async function LoginAdmin(req, res, next) {
                 message: "Incorrect Email or password",
             });
         }
+        console.log("adminController 110");
         const { id } = User;
+        console.log("adminController 111");
         const token = (0, utils_1.generateToken)({ id });
+        console.log("adminController 112");
         const validUser = await bcryptjs_1.default.compare(req.body.password, User.password);
+        console.log("adminController 113");
         if (!validUser) {
             return res.status(401).json({
                 message: "Incorrect Email or password",

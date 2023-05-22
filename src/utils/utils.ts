@@ -1,5 +1,6 @@
 import Joi from "joi";
 import jwt from "jsonwebtoken";
+
 export const registerSchema = Joi.object().keys({
     // title:Joi.string().lowercase().required(),
     // completed:Joi.boolean().required(),
@@ -21,7 +22,9 @@ export const imageLoginSchema = Joi.object().keys({
 });
 
 export const generateToken = (user: { [key: string]: unknown }): unknown => {
-    const pass = process.env.JWT_SECRETE as string;
+    const pass = process.env.JWT_SECRET as string;
+    console.log("util 25", pass);
+
     return jwt.sign(user, pass, { expiresIn: "7d" });
 };
 

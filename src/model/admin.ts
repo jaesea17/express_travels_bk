@@ -1,5 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import db from "../config/database.config";
+
 interface AdminAttributes {
   id: string;
   email: string;
@@ -10,7 +11,7 @@ interface AdminAttributes {
   face_id: string;
 }
 
-export class AdminInstance extends Model<AdminAttributes> {}
+export class AdminInstance extends Model<AdminAttributes> { }
 
 AdminInstance.init(
   {
@@ -19,9 +20,9 @@ AdminInstance.init(
       primaryKey: true,
     },
     email: {
-      type: DataTypes.STRING, 
+      type: DataTypes.STRING,
       allowNull: false,
-      unique:true,
+      unique: true,
     },
     password: {
       type: DataTypes.STRING,
