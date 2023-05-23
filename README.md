@@ -4,7 +4,7 @@ The backend to the Express travels app. An app the helps clients book bus ticket
 ## Installation
 
 ```bash
-$ npm install
+$ yarn
 ```
 
 ## Running the app
@@ -12,20 +12,8 @@ Make sure you have docker installed and running.
 
 ```bash
 # development
-$ npm run start
+$ yarn dev 
 ```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
 
 
