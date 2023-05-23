@@ -7,8 +7,6 @@ The backend to the Express travels app. An app the helps clients book bus ticket
 $ yarn
 ```
 
-## Running the app
-Make sure you have docker installed and running.
 
 ```bash
 # development
